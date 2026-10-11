@@ -26,8 +26,8 @@ app.get('/users/:id', (req, res) => res.render('user-detail', { id: req.params.i
 app.use('/api', (_req, res) => res.status(404).json({ message: 'Ruta no encontrada' }));
 app.use((_req, res) => res.status(404).render('404'));
 app.use((error, _req, res, _next) => {
-  console.error(error);
   const status = error.code === 11000 ? 409 : error.status || 500;
+  if (status >= 500) console.error('Request error:', error.name);
   const message = error.code === 11000 ? 'El email ya está en uso' :
     status === 500 ? 'Error interno del servidor' : error.message;
   res.status(status).json({ message });
