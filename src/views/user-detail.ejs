@@ -1,0 +1,5 @@
+<%- include('partials/head', { title: 'Detalle de usuario', page: 'userDetail' }) %>
+<section class="page-heading"><span class="eyebrow">ADMINISTRACIÓN</span><h1>Detalle de usuario</h1><p><a href="/admin">← Volver al listado</a></p></section>
+<div id="message" class="message" role="alert"></div>
+<section class="card-panel"><dl id="userDetail" class="details" data-user-id="<%= id %>"></dl></section>
+<%- include('partials/foot') %>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> | Laboratorio JWT</title>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+<body data-page="<%= page %>">
+  <nav class="indigo darken-4">
+    <div class="nav-wrapper container">
+      <a href="/dashboard" class="brand-logo">AuthLab</a>
+      <ul class="right">
+        <li class="private-link"><a href="/dashboard">Inicio</a></li>
+        <li class="private-link"><a href="/profile">Mi cuenta</a></li>
+        <li class="admin-link"><a href="/admin">Administración</a></li>
+        <li class="private-link"><a href="#" id="logout">Salir</a></li>
+      </ul>
+    </div>
+  </nav>
+  <main class="container">

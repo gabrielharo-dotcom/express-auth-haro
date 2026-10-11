@@ -1,0 +1,5 @@
+<%- include('partials/head', { title: 'Panel de administrador', page: 'admin' }) %>
+<section class="page-heading"><span class="eyebrow">ADMINISTRACIÓN</span><h1>Usuarios registrados</h1><p>Consulta las cuentas, sus roles y fechas de registro.</p></section>
+<div id="message" class="message" role="alert"></div>
+<section class="card-panel table-wrap"><table class="highlight"><thead><tr><th>Nombre</th><th>Correo</th><th>Rol</th><th>Registro</th><th>Acción</th></tr></thead><tbody id="usersTable"></tbody></table></section>
+<%- include('partials/foot') %>

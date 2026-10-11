@@ -1,0 +1,17 @@
+<%- include('partials/head', { title: 'Mi cuenta', page: 'profile' }) %>
+<section class="page-heading"><span class="eyebrow">MI CUENTA</span><h1>Tu perfil</h1><p>Consulta y actualiza tus datos personales.</p></section>
+<div id="message" class="message" role="alert"></div>
+<section class="form-card card-panel"><form id="profileForm">
+  <div class="row">
+    <div class="input-field col s12 m6"><input id="name" name="name" required><label for="name">Nombre</label></div>
+    <div class="input-field col s12 m6"><input id="lastName" name="lastName" required><label for="lastName">Apellido</label></div>
+    <div class="input-field col s12 m6"><input id="phoneNumber" name="phoneNumber" required><label for="phoneNumber">Teléfono</label></div>
+    <div class="input-field col s12 m6"><input id="birthdate" name="birthdate" type="date" required><label class="active" for="birthdate">Fecha de nacimiento</label></div>
+    <div class="input-field col s12"><input id="email" name="email" type="email" required><label for="email">Correo electrónico</label></div>
+    <div class="input-field col s12"><input id="url_profile" name="url_profile" type="url"><label for="url_profile">URL de perfil</label></div>
+    <div class="input-field col s12"><input id="address" name="address"><label for="address">Dirección</label></div>
+    <div class="input-field col s12"><input id="password" name="password" type="password" minlength="8"><label for="password">Nueva contraseña (opcional)</label><span class="helper-text">Mínimo 8 caracteres, una mayúscula, un número y uno de # $ % & * @</span></div>
+  </div>
+  <p id="profileMeta"></p><button class="btn indigo" type="submit">Guardar cambios</button>
+</form></section>
+<%- include('partials/foot') %>

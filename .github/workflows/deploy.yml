@@ -1,0 +1,55 @@
+name: CI/CD - Deploy to Render
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: render-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    name: Validate API
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci --omit=dev
+      - name: Check JavaScript syntax
+        run: find src -name '*.js' -exec node --check {} \;
+      - name: Verify application imports
+        run: node --input-type=module -e "await import('./src/app.js'); console.log('API imports OK');"
+      - name: Test JWT protection and API
+        run: npm test
+
+  deploy:
+    name: Deploy to Render
+    needs: validate
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger Render deployment
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$RENDER_DEPLOY_HOOK_URL" ]; then
+            echo "Missing repository secret RENDER_DEPLOY_HOOK_URL"
+            exit 1
+          fi
+          curl --fail --silent --show-error --max-time 60 \
+            --request POST "${RENDER_DEPLOY_HOOK_URL}&ref=${GITHUB_SHA}"
